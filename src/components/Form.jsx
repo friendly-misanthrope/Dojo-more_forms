@@ -10,6 +10,7 @@ const Form = (props) => {
     confirmPassword: ""
   })
 
+  // Setting default values for hasBeenSubmitted and userList state items
   const [hasBeenSubmitted, setHasBeenSubmitted] = useState(false)
   const [userList, setUserList] = useState([])
 
@@ -17,7 +18,6 @@ const Form = (props) => {
   const {firstName, lastName, email, password, confirmPassword} = user
 
   // Function to handle changing form inputs and update the user object accordingly
-  // Validates form data before setting user object
   const handleUserChange = (e) => {
       setUser(prevUserState => {return {...prevUserState, [e.target.name]: e.target.value}})
   }
@@ -26,7 +26,6 @@ const Form = (props) => {
   const validateForm = () => {
     if (firstName.length < 2 || lastName.length < 2 || email.length < 5 || password.length < 8 || confirmPassword !== password) {
       return false
-
     }
     return true
   }
@@ -57,8 +56,9 @@ const Form = (props) => {
 
       // Set hasBeenSubmitted to true
       setHasBeenSubmitted(true)
+      return true
     } else {
-      console.log("One or more inputs are invalid. Please check validation messages on the form.")
+      return false
     }
   }
 
