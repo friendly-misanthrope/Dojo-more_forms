@@ -20,11 +20,15 @@ h1 {
 
 .user-form {
   background-color: gray;
-  padding: 1rem 3rem 0;
+  padding: 1rem 3rem 1rem;
   border-radius: 12px;
 }
 
 label {
   color: white;
   font-size: 1rem;
+}
+
+.errorMsg {
+  color: rgb(150, 0, 0);
 }
