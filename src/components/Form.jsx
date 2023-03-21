@@ -56,10 +56,11 @@ const Form = (props) => {
 
       // Set hasBeenSubmitted to true
       setHasBeenSubmitted(true)
+
+      // return true if user is successfully submitted to our userList
       return true
-    } else {
-      return false
     }
+    return false
   }
 
   // JSX return
