@@ -11,6 +11,7 @@ const Form = (props) => {
   })
 
   const [hasBeenSubmitted, setHasBeenSubmitted] = useState(false)
+  const [userList, setUserList] = useState([])
 
   // destructuring the 'user' state object into individual variables
   const {firstName, lastName, email, password, confirmPassword} = user
@@ -32,6 +33,7 @@ const Form = (props) => {
     return formIsValid
   }
 
+  // Function to display a message to the user based on whether the form has been submitted
   const formMessage = () => {
     if (!hasBeenSubmitted) {
       return "Please submit the form to continue"
@@ -39,13 +41,32 @@ const Form = (props) => {
     return "Thank you for submitting the form"
   }
 
+  // Function to submit user
+  const submitUser = (e) => {
+    e.preventDefault()
+
+    if (validateForm()) {
+      // Add user to user list if form data is all valid
+      setUserList(prevUserList => {return [...prevUserList, user]})
+
+      // Reset user object to default value
+      setUser(prevUserState => {return {...prevUserState, [e.target.name]: ""}})
+
+      // Set hasBeenSubmitted to true
+      setHasBeenSubmitted(true)
+    } else {
+      console.log("One or more inputs are invalid. Please check validation messages on the form.")
+    }
+  }
+
   // JSX return
   return (
     <div>
       <h1>Hook Form</h1>
+      <h2>{formMessage()}</h2>
       <div className="user-form">
-        <h2>{formMessage()}</h2>
-        `<form>
+      
+        <form onSubmit={submitUser}>
           <div class="form-group">
             <label for="firstName">First Name: </label>
             <input type="text" className="form-control" id="firstName" name="firstName" onChange={handleUserChange} />
@@ -70,7 +91,14 @@ const Form = (props) => {
             <label for="confirmPassword">Confirm Password: </label>
             <input type="password" className="form-control" id="confirmPassword" name="confirmPassword" onChange={handleUserChange} />
           </div>
-        </form>`
+
+          {
+            !validateForm() ?
+            <input type="submit" value="Submit" disabled />
+            : <input type="submit" value="Submit" />
+          }
+
+        </form>
       </div>
 
       {/* Show user data in real time according to the values in the form inputs */}
