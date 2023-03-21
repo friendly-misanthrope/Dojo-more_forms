@@ -32,11 +32,19 @@ const Form = (props) => {
     return formIsValid
   }
 
+  const formMessage = () => {
+    if (!hasBeenSubmitted) {
+      return "Please submit the form to continue"
+    }
+    return "Thank you for submitting the form"
+  }
+
   // JSX return
   return (
     <div>
       <h1>Hook Form</h1>
       <div className="user-form">
+        <h2>{formMessage()}</h2>
         `<form>
           <div class="form-group">
             <label for="firstName">First Name: </label>
