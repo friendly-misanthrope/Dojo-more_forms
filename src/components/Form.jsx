@@ -10,12 +10,26 @@ const Form = (props) => {
     confirmPassword: ""
   })
 
+  const [hasBeenSubmitted, setHasBeenSubmitted] = useState(false)
+
   // destructuring the 'user' state object into individual variables
   const {firstName, lastName, email, password, confirmPassword} = user
 
   // Function to handle changing form inputs and update the user object accordingly
+  // Validates form data before setting user object
   const handleUserChange = (e) => {
-    setUser(prevUserState => {return {...prevUserState, [e.target.name]: e.target.value}})
+    if (validateForm()) {
+      setUser(prevUserState => {return {...prevUserState, [e.target.name]: e.target.value}})
+    }
+  }
+
+  // Function to validate form inputs
+  const validateForm = () => {
+    let formIsValid = true
+    if (firstName.length < 2 || lastName.length < 2 || email.length < 5 || password.length < 8 || confirmPassword !== password) {
+      formIsValid = false
+    }
+    return formIsValid
   }
 
   // JSX return
