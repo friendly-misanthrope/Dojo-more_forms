@@ -25,11 +25,9 @@ const Form = (props) => {
   // Function to validate form inputs
   const validateForm = () => {
     if (firstName.length < 2 || lastName.length < 2 || email.length < 5 || password.length < 8 || confirmPassword !== password) {
-      console.log(`Form is valid: ${false}`)
       return false
 
     }
-    console.log(console.log(`Form is valid: ${true}`))
     return true
   }
 
